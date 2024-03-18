@@ -1,0 +1,29 @@
+services:
+
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: portfolio
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: miguelgdro@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+
+volumes:
+  local_pgdata:
+  pgadmin-data:

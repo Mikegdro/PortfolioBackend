@@ -1,4 +1,5 @@
 # Backend
+
 El propósito de este repositorio es generar un backend sólido aprendiendo una tecnología nueva como es Go/Golang.
 
 Metas principales a realizar con este backend:
@@ -14,6 +15,7 @@ Con esta aplicación queremos recrear un poco el funcionamiento de Wordpress con
 El blog y admin-area tienen como finalidad aparte de darle más complejidad al proyecto del Portfolio, darnos un buen insight en la creación de este tipo de sistemas más complicados.
 
 ## Estructura principal backend
+
 Vamos a seguir la estructura del video de Melkey, un creador de contenido sobre Go bastante reconocido en la comunidad, el video en el que la explica es el siguiente [video](https://www.youtube.com/watch?v=dxPakeBsgl4&ab_channel=Melkey).
 
 En la raíz tenemos la declaración del módulo de la aplicación (go.mod), así como el readme y archivos necesarios para la construcción del proyecto.
@@ -41,7 +43,7 @@ Las tecnologías principales que estoy pensando usar son PostgreSQL o Supabase.
 
 La idea principal de esta infraestructura es tener todas las entidades principales necesarias para recrear en parte el funcionamiento de Wordpress de una manera sencilla y rápida.
 
-### Herramientas adicionales 
+### Herramientas adicionales
 
 Aquí dejaremos las ideas de herramientas adicionales para implementar que puedan ayudarnos al desarrollo de la aplicación.
 
