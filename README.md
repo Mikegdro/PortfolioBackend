@@ -1,6 +1,6 @@
 # Backend
 
-El propósito de este repositorio es generar un backend sólido aprendiendo una tecnología nueva como es Go/Golang.
+El propósito de este repositorio es generar un backend sólido aprendiendo una tecnología nueva como es .Net
 
 Metas principales a realizar con este backend:
 
@@ -16,17 +16,8 @@ El blog y admin-area tienen como finalidad aparte de darle más complejidad al p
 
 ## Estructura principal backend
 
-Vamos a seguir la estructura del video de Melkey, un creador de contenido sobre Go bastante reconocido en la comunidad, el video en el que la explica es el siguiente [video](https://www.youtube.com/watch?v=dxPakeBsgl4&ab_channel=Melkey).
-
-En la raíz tenemos la declaración del módulo de la aplicación (go.mod), así como el readme y archivos necesarios para la construcción del proyecto.
-
-Desde la raíz se extienden los subdirectorios principales los cuales son cmd, en el cual se encuentra el entrypoint de nuestra aplicación.
-
-Tenemos internal, donde tendremos todo el código interno de la aplicación como por ejemplo rutas.
-
-Y tendremos también tests, donde se ubicarán nuestros tests (si hacemos xd).
-
-Por último tendremos bin, donde se almacenaran nuestros binarios en un futuro.
+La idea principal de este backend es utilizar todas 
+![BackendArchitecture](./docs/BackendArchitecture.png)
 
 El plan es automatizar todo esto con CI/CD por lo que probablemente también contemos con archivos docker e instrucciones de ensamblaje para Github actions.
 
@@ -45,7 +36,3 @@ La idea principal de esta infraestructura es tener todas las entidades principal
 
 ### Herramientas adicionales
 
-Aquí dejaremos las ideas de herramientas adicionales para implementar que puedan ayudarnos al desarrollo de la aplicación.
-
-- CMD con la migración de Tablas.
-- CMD con un Faker de datos.
