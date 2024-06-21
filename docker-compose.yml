@@ -6,7 +6,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - local_pgdata:/var/lib/postgresql/data
+      - ./db/data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 1234
@@ -17,13 +17,9 @@ services:
     container_name: pgadmin
     restart: always
     volumes:
-      - pgadmin-data:/var/lib/pgadmin
+      - ./db/pg-admin:/var/lib/pgadmin
     ports:
       - "8888:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: miguelgdro@gmail.com
       PGADMIN_DEFAULT_PASSWORD: 1234
-
-volumes:
-  local_pgdata:
-  pgadmin-data:
