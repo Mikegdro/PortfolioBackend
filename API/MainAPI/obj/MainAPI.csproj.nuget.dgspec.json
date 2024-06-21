@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Migue\\Desktop\\Proyectos\\portfolio\\PortfolioBackend\\PortfolioAPI\\PortfolioAPI.csproj": {}
+    "/home/mike/Documentos/Personal/PortfolioBackend/API/MainAPI/MainAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Migue\\Desktop\\Proyectos\\portfolio\\PortfolioBackend\\PortfolioAPI\\PortfolioAPI.csproj": {
+    "/home/mike/Documentos/Personal/PortfolioBackend/API/MainAPI/MainAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Migue\\Desktop\\Proyectos\\portfolio\\PortfolioBackend\\PortfolioAPI\\PortfolioAPI.csproj",
-        "projectName": "PortfolioAPI",
-        "projectPath": "C:\\Users\\Migue\\Desktop\\Proyectos\\portfolio\\PortfolioBackend\\PortfolioAPI\\PortfolioAPI.csproj",
-        "packagesPath": "C:\\Users\\Migue\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Migue\\Desktop\\Proyectos\\portfolio\\PortfolioBackend\\PortfolioAPI\\obj\\",
+        "projectUniqueName": "/home/mike/Documentos/Personal/PortfolioBackend/API/MainAPI/MainAPI.csproj",
+        "projectName": "MainAPI",
+        "projectPath": "/home/mike/Documentos/Personal/PortfolioBackend/API/MainAPI/MainAPI.csproj",
+        "packagesPath": "/home/mike/.nuget/packages/",
+        "outputPath": "/home/mike/Documentos/Personal/PortfolioBackend/API/MainAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Migue\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/mike/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -42,12 +42,6 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "dependencies": {
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.1.4, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -67,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
