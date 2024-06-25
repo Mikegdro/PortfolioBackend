@@ -11,15 +11,3 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: portfolio
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    restart: always
-    volumes:
-      - ./db/pg-admin:/var/lib/pgadmin
-    ports:
-      - "8888:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: miguelgdro@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: 1234
