@@ -38,5 +38,9 @@ Thumbs.db
 dist
 dist/**/*
 
+# Ignore al DB data
+db
+db/**/*
+
 # ignore yarn.lock
 yarn.lock
