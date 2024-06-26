@@ -42,5 +42,8 @@ dist/**/*
 db
 db/**/*
 
+drizzle
+drizzle/**/
+
 # ignore yarn.lock
 yarn.lock
