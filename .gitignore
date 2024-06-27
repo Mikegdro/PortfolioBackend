@@ -39,8 +39,8 @@ dist
 dist/**/*
 
 # Ignore al DB data
-db
-db/**/*
+postgres
+postgres/**/*
 
 drizzle
 drizzle/**/

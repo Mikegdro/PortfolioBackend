@@ -1,9 +1,6 @@
 // Imports
 import express from 'express';
-const projects = require('./routes/projects');
-
-// Database Instantiation
-
+import projects from './routes/projects';
 
 // App initialization
 const app = express();  
@@ -12,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 // Routes & Endpoints
-app.use('/projects', projects);
+app.use('/api/projects', projects);
 
 const port = 3000;
 

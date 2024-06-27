@@ -1,9 +1,15 @@
 import express from 'express';
+import { getProjects, addProject } from '../services/projectService';
 
-const projects = express.Router();
+const router = express.Router();
 
-projects.get('/', (req, res) => {
-    
+router.get('/', (req, res) => {
+    const projects = getProjects();
+    res.json(projects);
 });
 
-module.exports = projects;
+router.post('/', (req, res) => {
+    res.send('Creating the diary entry');
+});
+
+export default router;
