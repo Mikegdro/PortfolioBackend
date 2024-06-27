@@ -1,5 +1,6 @@
 import express from 'express'
 import * as projectService from '../services/projectService'
+import toNewProjectEntry from '../utils'
 
 const router = express.Router()
 
@@ -18,9 +19,21 @@ router.get('/:id', (req, res) => {
 
 // Adds a project
 router.post('/', (req, res) => {
-  const newProjectEntry = projectService.addProject(req.body)
 
-  res.json(newProjectEntry)
+  try {
+
+    const newProjectEntry = toNewProjectEntry(req.body)
+
+    const addedProjectEntry = projectService.addProject(newProjectEntry)
+
+    res.send(addedProjectEntry)
+
+  } catch(e) {
+
+    res.status(400).send(e.message)
+    
+  }
+  
 })
 
 export default router
