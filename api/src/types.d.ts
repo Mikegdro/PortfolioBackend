@@ -8,3 +8,7 @@ export interface ProjectEntry {
   visibility: Visibility
   comment: string
 }
+
+export type NonSensitiveProjectEntry = Omit<ProjectEntry, 'comment'>
+
+export type NewProjectEntry = Omit<ProjectEntry, 'id'>

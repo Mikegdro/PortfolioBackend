@@ -31,9 +31,6 @@
     "postgres": "^3.4.4"
   },
   "eslintConfig": {
-    "parserOptions": {
-      "project": "./api/tsconfig.json"
-    },
-    "extends": ["./api/node_modules/ts-standard/eslintrc.json"]
+    "extends": ["./node_modules/ts-standard/eslintrc.json"]
   }
 }
