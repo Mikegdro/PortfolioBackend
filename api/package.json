@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
+  "description": "My portfolio API for accesing data from the web.",
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
@@ -9,7 +9,7 @@
     "dev": "npx nodemon ./src/index.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "node ./src/db/migrate.ts",
-    "lint": "ts-standard",
+    "lint": "ts-standard --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -31,6 +31,9 @@
     "postgres": "^3.4.4"
   },
   "eslintConfig": {
-    "extends": ["./node_modules/ts-standard/eslintrc.json"]
+    "parserOptions": {
+      "project": "./api/tsconfig.json"
+    },
+    "extends": ["./api/node_modules/ts-standard/eslintrc.json"]
   }
 }
