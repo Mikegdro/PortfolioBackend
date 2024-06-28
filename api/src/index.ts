@@ -4,10 +4,6 @@ import projects from './routes/projects'
 
 import { corsMiddleware } from './middleware/cors'
 
-import 'dotenv/config'
-
-import db from './db'
-
 // App initialization
 const app = express()
 app.use(express.json())

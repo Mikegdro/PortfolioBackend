@@ -4,9 +4,10 @@ import toNewProjectEntry from '../utils'
 
 const router = express.Router()
 
+
 // Retrieves ALL projects
 router.get('/', (req, res) => {
-  const projects = projectService.getProjectsWithoutSensitiveInfo()
+  const projects = projectService.getProjects()
   res.json(projects)
 })
 

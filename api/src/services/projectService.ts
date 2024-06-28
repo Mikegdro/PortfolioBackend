@@ -1,15 +1,16 @@
 import { NewProjectEntry, NonSensitiveProjectEntry, ProjectEntry } from '../types'
 import projectData from './projects.json'
 
-import { retrieveAllProjects } from '../models/projects'
+import { Request, Response } from 'express'
+
+import retrieveAllProjects from '../models/projects'
 
 // Data recovery
 const projects: ProjectEntry[] = projectData as ProjectEntry[]
 
 // Retreives all the projects raw, without altering anything
 export const getProjects = (): ProjectEntry[] => {
-  //const data = retrieveAllProjects().then((data) => console.log(data))
-  
+  const data = retrieveAllProjects()
   return projects
 }
 
