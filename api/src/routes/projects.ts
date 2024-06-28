@@ -28,10 +28,11 @@ router.post('/', (req, res) => {
 
     res.send(addedProjectEntry)
 
-  } catch(e) {
+  } catch(error) {
 
-    res.status(400).send(e.message)
     
+
+    res.status(400).send(error)
   }
   
 })

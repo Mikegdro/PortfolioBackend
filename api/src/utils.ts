@@ -24,7 +24,7 @@ const parseComment = (object: any): string => {
 const parseDate = (object: any): string => {
 
     if (!isString(object)) {
-        throw new Error('Inccorrect or missing date')
+        throw new Error('Incorrect or missing date')
     }
 
     return object
@@ -34,13 +34,28 @@ const parseDate = (object: any): string => {
 const parseWeather = (object: any): Weather => {
 
     if (!isString(object)) {
-
+        throw new Error('Incorrect object type')
     }
+
+    if (object != 'sunny' || object != 'windy' || object != 'rainy' || object != 'stormy') {
+        throw new Error('Incorrect Weather type')
+    }
+
+    return object
 }
 
 // Parses and validates the visibility as its type
 const parseVisibility = (object: any): Visibility => {
 
+    if(!isString(object)) {
+        throw new Error('Incorrect type')
+    }
+
+    if (object != 'great' || object != 'great' || object != 'ok' || object != 'poor') {
+        throw new Error('Incorrect Visibility type')
+    }
+
+    return object
 }
 
 // Parses all the information of a project and creates a new object
