@@ -2,12 +2,21 @@ import { NewProjectEntry, Visibility, Weather } from "./types"
 
 // Validates the received object as an string
 const isString = (possibleString: any): boolean => {
+    return typeof possibleString === 'string'
+}
 
-    if (typeof possibleString != 'string') {
-        return false
-    }
+// Validates the received object as a Date
+const isDate = (possibleDate: string): boolean => {
+    return Boolean(Date.parse(possibleDate))
+}
 
-    return true
+// Validates the received object as a Weather ENUM type
+const isWeather = (possibleWeather: any): boolean => {
+    return Object.values(Weather).includes(possibleWeather)
+}
+
+const isVisibility = (possibleVisibility: any): boolean => {
+    return Object.values(Visibility).includes(possibleVisibility)
 }
 
 // Parses and validates the comment
@@ -21,41 +30,33 @@ const parseComment = (object: any): string => {
 }
 
 // Parses and validates the date as a string
-const parseDate = (object: any): string => {
+const parseDate = (dateFromRequest: any): string => {
 
-    if (!isString(object)) {
+    if (!isString(dateFromRequest) || !isDate(dateFromRequest)) {
         throw new Error('Incorrect or missing date')
     }
 
-    return object
+    return dateFromRequest
 }
 
 // Parses and validates the weather as its type
-const parseWeather = (object: any): Weather => {
+const parseWeather = (weatherFromRequest: any): Weather => {
 
-    if (!isString(object)) {
+    if (!isString(weatherFromRequest) || !isWeather(weatherFromRequest)) {
         throw new Error('Incorrect object type')
     }
 
-    if (object != 'sunny' || object != 'windy' || object != 'rainy' || object != 'stormy') {
-        throw new Error('Incorrect Weather type')
-    }
-
-    return object
+    return weatherFromRequest
 }
 
 // Parses and validates the visibility as its type
-const parseVisibility = (object: any): Visibility => {
+const parseVisibility = (visibilityFromRequest: any): Visibility => {
 
-    if(!isString(object)) {
+    if(!isString(visibilityFromRequest) || !isVisibility(visibilityFromRequest)) {
         throw new Error('Incorrect type')
     }
 
-    if (object != 'great' || object != 'great' || object != 'ok' || object != 'poor') {
-        throw new Error('Incorrect Visibility type')
-    }
-
-    return object
+    return visibilityFromRequest
 }
 
 // Parses all the information of a project and creates a new object

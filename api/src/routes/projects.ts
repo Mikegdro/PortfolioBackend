@@ -21,9 +21,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
 
   try {
-
     const newProjectEntry = toNewProjectEntry(req.body)
-
     const addedProjectEntry = projectService.addProject(newProjectEntry)
 
     res.send(addedProjectEntry)
@@ -31,6 +29,8 @@ router.post('/', (req, res) => {
   } catch(error) {
 
     
+
+    console.log(typeof error)
 
     res.status(400).send(error)
   }
