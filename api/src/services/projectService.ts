@@ -1,14 +1,21 @@
 import { NewProjectEntry, NonSensitiveProjectEntry, ProjectEntry } from '../types'
 import projectData from './projects.json'
 
+import { retrieveAllProjects } from '../models/projects'
+
 // Data recovery
 const projects: ProjectEntry[] = projectData as ProjectEntry[]
 
 // Retreives all the projects raw, without altering anything
-export const getProjects = (): ProjectEntry[] => projects
+export const getProjects = (): ProjectEntry[] => {
+  //const data = retrieveAllProjects().then((data) => console.log(data))
+  
+  return projects
+}
 
 // Retrieves all the projects stripping them all from the comment
 export const getProjectsWithoutSensitiveInfo = (): NonSensitiveProjectEntry[] => {
+  
   const filteredprojects: NonSensitiveProjectEntry[] = projects.map(({ id, date, weather, visibility }) => {
     return {
       id, date, weather, visibility

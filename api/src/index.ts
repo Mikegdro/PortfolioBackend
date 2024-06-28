@@ -2,13 +2,17 @@
 import express from 'express'
 import projects from './routes/projects'
 
-require('dotenv/config')
+import { corsMiddleware } from './middleware/cors'
+
+import 'dotenv/config'
+
+import db from './db'
 
 // App initialization
 const app = express()
-
-// Extensions
 app.use(express.json())
+app.use(corsMiddleware)
+app.disable('x-powered-by')
 
 // Routes & Endpoints
 app.use('/api/projects', projects)

@@ -28,8 +28,6 @@ router.post('/', (req, res) => {
 
   } catch(error) {
 
-    
-
     console.log(typeof error)
 
     res.status(400).send(error)
