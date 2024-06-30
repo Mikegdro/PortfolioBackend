@@ -1,26 +1,28 @@
-export enum Visibility {
-  Great = 'great',
-  Good = 'good',
-  Ok = 'ok',
-  Poor = 'poor',
+import { Project, PersonalProject, PrivateProject } from "./db/schema"
+
+export type Project = typeof Project.$inferSelect
+
+export type PersonalProject = typeof PersonalProject.$inferSelect
+
+export type PrivateProject = typeof PrivateProject.$inferSelect
+
+export interface ProjectJoined extends Project {
+  PersonalProject: PersonalProject[]
+  PrivateProject: PrivateProject[]
 }
 
-export enum Weather {
-  Sunny = 'sunny',
-  Rainy = 'rainy',
-  Cloudy = 'cloudy',
-  Windy = 'windy',
-  Stormy = 'stormy'
+export enum ProjectType {
+  Private = 'private',
+  Personal = 'personal'
 }
 
-export interface ProjectEntry {
-  id: number
-  date: string
-  weather: Weather
-  visibility: Visibility
-  comment: string
+export interface CreateProjectData extends Omit<Project, 'id'> {
+  type: ProjectType,
+  name: string,
+  personalProject?: Omit<PersonalProject, 'id' | 'idProject'>,
+  privateProject?: Omit<PrivateProject, 'id' | 'idProject'>
 }
 
-export type NonSensitiveProjectEntry = Omit<ProjectEntry, 'comment'>
+export type CreatePersonalProject =  Omit<PersonalProject, 'id'> 
 
-export type NewProjectEntry = Omit<ProjectEntry, 'id'>
+export type CreatePrivateProject =  Omit<PrivateProject, 'id'> 

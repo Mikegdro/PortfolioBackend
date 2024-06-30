@@ -6,17 +6,12 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
+import * as schema from '../db/schema'
+
 if (!process.env.DB_URL) {
-    throw new Error('DB credentials not present')
+  throw new Error('DB credentials not present')
 }
 
-const connection = postgres(process.env.DB_URL)
+export const connection = postgres(process.env.DB_URL)
 
-export const db = drizzle(connection)
-
-
-
-
-
-
-
+export const db = drizzle(connection, {schema})

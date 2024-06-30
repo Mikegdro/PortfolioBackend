@@ -8,7 +8,7 @@
     "build": "tsc",
     "dev": "npx nodemon ./src/index.ts",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "node ./src/db/migrate.ts",
+    "db:migrate": "npx nodemon ./src/db/migrate.ts",
     "lint": "ts-standard --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
