@@ -17,7 +17,7 @@ El blog y admin-area tienen como finalidad aparte de darle más complejidad al p
 ## Estructura principal backend
 
 La idea principal de este backend es utilizar todas 
-![BackendArchitecture](./docs/BackendArchitecture.png)
+![BackendArchitecture](./docs/BackendArchitecture2.png)
 
 El plan es automatizar todo esto con CI/CD por lo que probablemente también contemos con archivos docker e instrucciones de ensamblaje para Github actions.
 
