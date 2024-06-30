@@ -58,14 +58,11 @@ export const createProjectWithChildren = async (req: Request, res: Response) => 
   // Project name check
   if (!project.name) {
     res.status(400).send('Especifíque un nombre de proyecto')
-    return
   }
 
   // Project type check
   if (!Object.values(ProjectType).includes(project.type)) {
-    console.log(Object.values(ProjectType).includes(project.type))
     res.status(400).send('Especifique el tipo de proyecto')
-    return
   }
 
   try {
