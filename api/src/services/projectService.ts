@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { CreatePersonalProject, CreateProjectData, ProjectJoined, ProjectType } from '../types'
+import { CreatePersonalProject, CreatePrivateProject, CreateProjectData, ProjectJoined, ProjectType } from '../types'
 
 import * as ProjectModel from '../models/projects'
 
@@ -66,11 +66,12 @@ export const createProjectWithChildren = async (req: Request, res: Response) => 
   }
 
   try {
+
     const data = await ProjectModel.createProject({ name: req.body.name })
     
     if (project.type === 'personal') {
       const personalProject = await createPersonalProject({
-        title: project.name,
+        title: project.name ?? "Titulo temporal",
         idProject: data[0].id,
         image: project.personalProject?.image ?? null,
         imageReduced: project.personalProject?.imageReduced ?? null,
@@ -84,7 +85,13 @@ export const createProjectWithChildren = async (req: Request, res: Response) => 
     }
 
     if (project.type === 'private') {
-
+      /* const privateProject = await createPrivateProject({
+        title: project.name ?? "Titulo temporal",
+        idProject: data[0].id,
+        startDate: project.privateProject?.startDate ?? null,
+        endDate: project.privateProject?.endDate ?? null,
+        
+      }) */
     }
 
   } catch (err) {
@@ -133,4 +140,14 @@ const createProject = async (name: string) => {
  */
 const createPersonalProject = async (project: CreatePersonalProject) => {
   return await ProjectModel.createPersonalProject(project)
+}
+
+/**
+ *  Creates a Personal Project.
+ * 
+ *  @param project 
+ *  @returns 
+ */
+const createPrivateProject = async (project: CreatePrivateProject) => {
+  return await ProjectModel.createPrivateProject(project)
 }

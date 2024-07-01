@@ -62,6 +62,8 @@ export const createPrivateProject = async (project: CreatePrivateProject) => {
     idProject: project.idProject,
     title: project.title,
     companyId: project.companyId,
+    startDate: project.startDate,
+    endDate: project.endDate
   }).returning()
 }
 

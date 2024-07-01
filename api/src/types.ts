@@ -18,9 +18,13 @@ export enum ProjectType {
 
 export interface CreateProjectData extends Omit<Project, 'id'> {
   type: ProjectType,
-  name: string,
   personalProject?: Omit<PersonalProject, 'id' | 'idProject'>,
   privateProject?: Omit<PrivateProject, 'id' | 'idProject'>
+}
+
+export interface UpdateProjectData extends Project {
+  personalProject?: PersonalProject,
+  privateProject?: PrivateProject
 }
 
 export type CreatePersonalProject =  Omit<PersonalProject, 'id'> 
