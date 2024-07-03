@@ -65,10 +65,13 @@ export const createProjectWithChildren = async (req: Request, res: Response) => 
     res.status(400).send('Especifique el tipo de proyecto')
   }
 
+  // Try-catch for Error processing
   try {
 
+    // Creates the main project here and retrieves the inserted data INLCUDING the UUID we need to create the children
     const data = await ProjectModel.createProject({ name: req.body.name })
     
+    // Checks for the project type and does the according 
     if (project.type === 'personal') {
       const personalProject = await createPersonalProject({
         title: project.name ?? "Titulo temporal",
@@ -95,7 +98,7 @@ export const createProjectWithChildren = async (req: Request, res: Response) => 
     }
 
   } catch (err) {
-    res.status(500).send('Ha ocurrido un problema, inténtelo de nuevo más tarde.')
+    handleError(res, err)    
   }
 }
 
@@ -120,6 +123,25 @@ export const createProjectWithoutChildren = async (req: Request, res: Response) 
     res.status(500).send('Ha ocurrido un problema, intentelo de nuevo más tarde.')
   }
 
+}
+
+/**
+ *  Function to type check the err, and respond acordingly to the client.
+ * 
+ *  @param res 
+ *  @param err 
+ */
+const handleError = (res: Response, err: unknown) => {
+
+  let errMessage = 'Ha ocurrido un problema, inténtelo de nuevo más tarde';
+
+  if (typeof err === 'string') {
+    errMessage = err
+  } else if (err instanceof Error) {
+    errMessage = err.message
+  }
+
+  res.status(500).send(errMessage)
 }
 
 /**
