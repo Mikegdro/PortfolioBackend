@@ -15,3 +15,5 @@ if (!process.env.DB_URL) {
 export const connection = postgres(process.env.DB_URL)
 
 export const db = drizzle(connection, {schema})
+
+export const createTransaction = db.transaction

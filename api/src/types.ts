@@ -1,32 +1,10 @@
-import { Project, PersonalProject, PrivateProject } from "./db/schema"
+import { Project, PersonalProject, PrivateProject, ProjectType } from "./db/schema"
 
 export type Project = typeof Project.$inferSelect
+export type NewProject = typeof Project.$inferInsert
 
 export type PersonalProject = typeof PersonalProject.$inferSelect
+export type NewPersonalProject = typeof PersonalProject.$inferInsert
 
 export type PrivateProject = typeof PrivateProject.$inferSelect
-
-export interface ProjectJoined extends Project {
-  PersonalProject: PersonalProject[]
-  PrivateProject: PrivateProject[]
-}
-
-export enum ProjectType {
-  Private = 'private',
-  Personal = 'personal'
-}
-
-export interface CreateProjectData extends Omit<Project, 'id'> {
-  type: ProjectType,
-  personalProject?: Omit<PersonalProject, 'id' | 'idProject'>,
-  privateProject?: Omit<PrivateProject, 'id' | 'idProject'>
-}
-
-export interface UpdateProjectData extends Project {
-  personalProject?: PersonalProject,
-  privateProject?: PrivateProject
-}
-
-export type CreatePersonalProject =  Omit<PersonalProject, 'id'> 
-
-export type CreatePrivateProject =  Omit<PrivateProject, 'id'> 
+export type NewPrivateProject = typeof PrivateProject.$inferInsert

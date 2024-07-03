@@ -5,7 +5,6 @@ import { eq } from 'drizzle-orm'
 import { PersonalProject, PrivateProject, Project } from '../db/schema'
 
 import crypto from 'crypto'
-import { CreatePersonalProject, CreatePrivateProject } from '../types'
 
 /**
  *  Retrieves all the projects from the DB with joins.
@@ -36,8 +35,8 @@ export const findById = async (idToFind: any) => {
  * 
  *  @param project 
  */
-export const createProject = async (project: { name: string }) => {
-  return await db.insert(Project).values({ id: crypto.randomUUID(), name: project.name }).returning()
+export const createProject = async (project: { name: string }, trx = db) => {
+  return await trx.insert(Project).values({ id: crypto.randomUUID(), name: project.name }).returning()
 }
 
 /**
@@ -45,8 +44,8 @@ export const createProject = async (project: { name: string }) => {
  * 
  *  @param project 
  */
-export const createPersonalProject = async (project: CreatePersonalProject) => {
-  return await db.insert(PersonalProject).values({
+export const createPersonalProject = async (project: any, trx = db) => {
+  return await trx.insert(PersonalProject).values({
     id: crypto.randomUUID(),
     idProject: project.idProject,
     title: project.title,
@@ -56,7 +55,7 @@ export const createPersonalProject = async (project: CreatePersonalProject) => {
   }).returning()
 }
 
-export const createPrivateProject = async (project: CreatePrivateProject) => {
+export const createPrivateProject = async (project: any, trx = db) => {
   return await db.insert(PrivateProject).values({
     id: crypto.randomUUID(),
     idProject: project.idProject,
@@ -65,5 +64,9 @@ export const createPrivateProject = async (project: CreatePrivateProject) => {
     startDate: project.startDate,
     endDate: project.endDate
   }).returning()
+}
+
+export const createTransaction = async () => {
+  return db.transaction;
 }
 

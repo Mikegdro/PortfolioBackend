@@ -1,8 +1,11 @@
 import { Request, Response } from 'express'
 
-import { CreatePersonalProject, CreatePrivateProject, CreateProjectData, ProjectJoined, ProjectType } from '../types'
+
 
 import * as ProjectModel from '../models/projects'
+
+import { createTransaction } from '../db'
+import { PostgresJsDatabase } from 'drizzle-orm/postgres-js'
 
 /**
  *  Retrieves the entire length of projects with its children.
@@ -12,7 +15,7 @@ import * as ProjectModel from '../models/projects'
  */
 export const getProjects = async (req: Request, res: Response) => {
   try {
-    const data: ProjectJoined[] = await ProjectModel.retrieveAllProjects()
+    const data = await ProjectModel.retrieveAllProjects()
     res.json(data)
   } catch (err) {
     console.log(err)
@@ -53,49 +56,12 @@ export const getProjectById = async (req: Request, res: Response) => {
  */
 export const createProjectWithChildren = async (req: Request, res: Response) => {
 
-  const project: CreateProjectData = req.body;
-
-  // Project name check
-  if (!project.name) {
-    res.status(400).send('Especifíque un nombre de proyecto')
-  }
-
-  // Project type check
-  if (!Object.values(ProjectType).includes(project.type)) {
-    res.status(400).send('Especifique el tipo de proyecto')
-  }
+  
 
   // Try-catch for Error processing
   try {
 
-    // Creates the main project here and retrieves the inserted data INLCUDING the UUID we need to create the children
-    const data = await ProjectModel.createProject({ name: req.body.name })
     
-    // Checks for the project type and does the according 
-    if (project.type === 'personal') {
-      const personalProject = await createPersonalProject({
-        title: project.name ?? "Titulo temporal",
-        idProject: data[0].id,
-        image: project.personalProject?.image ?? null,
-        imageReduced: project.personalProject?.imageReduced ?? null,
-        repository: project.personalProject?.repository ?? null,
-      })
-      
-      res.status(201).json({
-        project: data,
-        personalProject: personalProject
-      })
-    }
-
-    if (project.type === 'private') {
-      /* const privateProject = await createPrivateProject({
-        title: project.name ?? "Titulo temporal",
-        idProject: data[0].id,
-        startDate: project.privateProject?.startDate ?? null,
-        endDate: project.privateProject?.endDate ?? null,
-        
-      }) */
-    }
 
   } catch (err) {
     handleError(res, err)    
@@ -117,7 +83,7 @@ export const createProjectWithoutChildren = async (req: Request, res: Response) 
   }
 
   try {
-    const data = await createProject(name)
+    const data = await ProjectModel.createProject(name)
     res.json(data)
   } catch (err) {
     res.status(500).send('Ha ocurrido un problema, intentelo de nuevo más tarde.')
@@ -145,31 +111,58 @@ const handleError = (res: Response, err: unknown) => {
 }
 
 /**
- *  Creates a project.
+ *  This function manages the creation of a personal project, using the transaction object provided by drizzle,
+ *  and passing it to the through params to ensure the correct creation of both tables.
  * 
- *  @param name 
- *  @returns 
+ *  @param req HTTP request through Express 
+ *  @param res HTTP response
  */
-const createProject = async (name: string) => {
-  return await ProjectModel.createProject({ name: name })
+const createPersonalProject = async (req: Request, res: Response) => {
+
+  const project = req.body;
+
+  // This operations are made using a transaction to ensure that if one of them fails, both are rolled back
+  const result = await createTransaction(async (trx) => {
+
+    // Creates the main project
+    const data = await ProjectModel.createProject({ name: req.body.name }, trx)
+
+    // Creates the personal project
+    const personalProject = await ProjectModel.createPersonalProject({
+      title: project.name ?? "Titulo temporal",
+      idProject: data[0].id,
+      image: project.personalProject?.image ?? null,
+      imageReduced: project.personalProject?.imageReduced ?? null,
+      repository: project.personalProject?.repository ?? null,
+    }, trx)
+
+    return { data, personalProject }
+  })
+
+  res.status(201).json(result)
 }
 
-/**
- *  Creates a Personal Project.
- * 
- *  @param project 
- *  @returns 
- */
-const createPersonalProject = async (project: CreatePersonalProject) => {
-  return await ProjectModel.createPersonalProject(project)
-}
+const createPrivateProject = async (req: Request, res: Response) => {
 
-/**
- *  Creates a Personal Project.
- * 
- *  @param project 
- *  @returns 
- */
-const createPrivateProject = async (project: CreatePrivateProject) => {
-  return await ProjectModel.createPrivateProject(project)
+  const project = req.body;
+
+  // This operations are made using a transaction to ensure that if one of them fails, both are rolled back
+  const result = await createTransaction(async (trx) => {
+
+    // Creates the main project
+    const data = await ProjectModel.createProject({ name: req.body.name }, trx)
+
+    // Creates the personal project
+    const privateProject = await ProjectModel.createPrivateProject({
+      title: project.name ?? "Titulo temporal",
+      idProject: data[0].id,
+      companyId: project.privateProject?.companyId ?? null,
+      startDate: "",
+      endDate: ""
+    }, trx)
+
+    return { data, privateProject }
+  })
+
+  res.status(201).json(result)
 }
