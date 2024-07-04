@@ -16,7 +16,7 @@ For this project the configuration was:
 
 ## Backend Architecture
 
-![BackendArchitecture](./docs/BackendArchitecture2.png)
+![BackendArchitecture](./docs/Backend.png)
 
 ## Database model
 
