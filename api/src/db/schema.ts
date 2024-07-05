@@ -1,5 +1,7 @@
 import { relations } from 'drizzle-orm'
 import { uniqueIndex } from 'drizzle-orm/pg-core'
+import { integer } from 'drizzle-orm/pg-core'
+import { numeric } from 'drizzle-orm/pg-core'
 import { boolean } from 'drizzle-orm/pg-core'
 import { pgEnum } from 'drizzle-orm/pg-core'
 import { date } from 'drizzle-orm/pg-core'
@@ -47,17 +49,6 @@ export const PersonalProject = pgTable('personal_project', {
   }
 })
 
-export const Company = pgTable('company', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  name: varchar('name').notNull(),
-  linkedin: varchar('linkedn'),
-  description: varchar('description'),
-  logo: varchar('logo')
-}, (table) => {
-  return {
-    nameIndex: uniqueIndex('company_name_idx').on(table.name)
-  }
-})
 
 export const PrivateProject = pgTable('private_project', {
   id: uuid('private_project_id').primaryKey().defaultRandom(),
@@ -72,16 +63,34 @@ export const PrivateProject = pgTable('private_project', {
   }
 })
 
-export const projectsRelations = relations(Project, ({ many }) => ({
-  PersonalProject: many(PersonalProject),
-  PrivateProject: many(PrivateProject)
+/** ================================= Company ==================================== */
+
+export const Company = pgTable('company', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: varchar('name').notNull(),
+  linkedin: varchar('linkedn'),
+  description: varchar('description'),
+  logo: varchar('logo')
+}, (table) => {
+  return {
+    nameIndex: uniqueIndex('company_name_idx').on(table.name)
+  }
+})
+
+
+/** ================================= Project & Company Relations ==================================== */
+
+export const projectsRelations = relations(Project, ({ many, one }) => ({
+  PersonalProject: one(PersonalProject),
+  PrivateProject: one(PrivateProject),
+  Achievement: many(Achievement)
 }))
 
 export const companyRelations = relations(Company, ({ many }) => ({
   PrivateProject: many(PrivateProject)
 }))
 
-export const privateProjectsRelation = relations(PrivateProject, ({ one, many }) => ({
+export const privateProjectsRelation = relations(PrivateProject, ({ one }) => ({
   Project: one(Project, { fields: [PrivateProject.idProject], references: [Project.id] }),
   Company: one(Company, { fields: [PrivateProject.companyId], references: [Company.id] })
 }))
@@ -90,9 +99,60 @@ export const personalProjectsRelation = relations(PersonalProject, ({ one }) => 
   Project: one(Project, { fields: [PersonalProject.idProject], references: [Project.id] })
 }))
 
-/** ================================= PROJECTS ==================================== */
+/** ================================= ACHIEVEMENTS ==================================== */
 
+export const Rol = pgEnum('rol', ['Frontend', 'Backend', 'Fullstack'])
 
-/** ================================= PROJECTS ==================================== */
+export const Achievement = pgTable('achievement', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  projectId: uuid('id').references(() => Project.id),
+  title: varchar('title').notNull(),
+  description: varchar('description'),
+  rol: Rol('rol')
+}, (table) => {
+  return {
+    titleIdx: uniqueIndex('title_index').on(table.title),
+    rolIdx: uniqueIndex('rol_index').on(table.rol)
+  }
+})
+
+/** ================================= Project & Achievement Relation ==================================== */
+
+export const achievementProjectRelation = relations(Achievement, ({ one }) => ({
+  Project: one(Project)
+}))
+
+/** ================================= EDUCATION ==================================== */
+
+export const Education = pgTable('education', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: varchar('title').notNull(),
+  description: varchar('description'),
+  web: varchar('web'),
+  linkedin: varchar('linkedin'),
+  score: numeric('score'),
+  startDate: date('start_date'),
+  endDate: date('end_date')
+}, (table) => {
+  return {
+    titleIdx: uniqueIndex('title_index').on(table.title)
+  }
+})
+
+export const Course = pgTable('course', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: varchar('title').notNull(),
+  description: varchar('description'),
+  instructor: varchar('instructor'),
+  link: varchar('link'),
+  linkedin: varchar('linkedin')
+}, (table) => {
+  return {
+    titleIdx: uniqueIndex('title_index').on(table.title)
+  }
+})
+
+/** ================================= TECNOLOGIES ==================================== */
+
 /** ================================= PROJECTS ==================================== */
 /** ================================= PROJECTS ==================================== */

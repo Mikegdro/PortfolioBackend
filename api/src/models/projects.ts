@@ -16,7 +16,8 @@ export const retrieveAllProjects = async () => {
   return await db.query.Project.findMany({
     with: {
       PrivateProject: true,
-      PersonalProject: true
+      PersonalProject: true,
+      Achievement: true
     }
   })
 }
