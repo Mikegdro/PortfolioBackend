@@ -4,6 +4,22 @@ import { pgEnum } from 'drizzle-orm/pg-core'
 import { date } from 'drizzle-orm/pg-core'
 import { pgTable, uuid, varchar } from 'drizzle-orm/pg-core'
 
+/** ================================= USERS ==================================== */
+export const user = pgTable('user', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userName: varchar('user_name').notNull(),
+  email: varchar('email').notNull(),
+  createdAt: date('created_at').defaultNow(),
+  updatedAt: date('updated_at').defaultNow(),
+  password: varchar('password'),
+}, (table) => {
+  return {
+    nameIdx: uniqueIndex('username_idx').on(table.userName),
+    emailIdx: uniqueIndex('email_idx').on(table.email)
+  }
+})
+
+/** ================================= PROJECTS ==================================== */
 export const ProjectType = pgEnum('project_type', ["private", "personal"])
 
 export const Project = pgTable('project', {
@@ -71,3 +87,10 @@ export const privateProjectsRelation = relations(PrivateProject, ({ one, many })
 export const personalProjectsRelation = relations(PersonalProject, ({ one }) => ({
   Project: one(Project, { fields: [PersonalProject.idProject], references: [Project.id] })
 }))
+
+/** ================================= PROJECTS ==================================== */
+
+
+/** ================================= PROJECTS ==================================== */
+/** ================================= PROJECTS ==================================== */
+/** ================================= PROJECTS ==================================== */
