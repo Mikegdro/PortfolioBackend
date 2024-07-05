@@ -1,11 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { uniqueIndex } from 'drizzle-orm/pg-core'
-import { integer } from 'drizzle-orm/pg-core'
-import { numeric } from 'drizzle-orm/pg-core'
-import { boolean } from 'drizzle-orm/pg-core'
-import { pgEnum } from 'drizzle-orm/pg-core'
-import { date } from 'drizzle-orm/pg-core'
-import { pgTable, uuid, varchar } from 'drizzle-orm/pg-core'
+import { uniqueIndex, integer, numeric, boolean, pgEnum, date, pgTable, uuid, varchar } from 'drizzle-orm/pg-core'
 
 /** ================================= USERS ==================================== */
 export const User = pgTable('user', {
@@ -15,7 +9,7 @@ export const User = pgTable('user', {
   createdAt: date('created_at').defaultNow(),
   updatedAt: date('updated_at').defaultNow(),
   password: varchar('password'),
-  admin: boolean('isAdmin').default(false),
+  admin: boolean('isAdmin').default(false)
 }, (table) => {
   return {
     nameIdx: uniqueIndex('username_idx').on(table.userName),
@@ -24,7 +18,7 @@ export const User = pgTable('user', {
 })
 
 /** ================================= PROJECTS ==================================== */
-export const ProjectType = pgEnum('project_type', ["private", "personal"])
+export const ProjectType = pgEnum('project_type', ['private', 'personal'])
 
 export const Project = pgTable('project', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -48,7 +42,6 @@ export const PersonalProject = pgTable('personal_project', {
     titleIndex: uniqueIndex('personal_title_idx').on(table.title)
   }
 })
-
 
 export const PrivateProject = pgTable('private_project', {
   id: uuid('private_project_id').primaryKey().defaultRandom(),
@@ -76,7 +69,6 @@ export const Company = pgTable('company', {
     nameIndex: uniqueIndex('company_name_idx').on(table.name)
   }
 })
-
 
 /** ================================= Project & Company Relations ==================================== */
 

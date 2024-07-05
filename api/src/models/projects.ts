@@ -8,9 +8,9 @@ import crypto from 'crypto'
 
 /**
  *  Retrieves all the projects from the DB with joins.
- * 
+ *
  *  Uses Drizzle's API
- *  
+ *
  */
 export const retrieveAllProjects = async () => {
   return await db.query.Project.findMany({
@@ -24,8 +24,8 @@ export const retrieveAllProjects = async () => {
 
 /**
  *  Retrieves a distinct Project filtering through UUID.
- * 
- *  @param idToFind  
+ *
+ *  @param idToFind
  */
 export const findById = async (idToFind: any) => {
   return await db.select().from(Project).where(eq(Project.id, idToFind))
@@ -33,8 +33,8 @@ export const findById = async (idToFind: any) => {
 
 /**
  *  Creates an standalone project
- * 
- *  @param project 
+ *
+ *  @param project
  */
 export const createProject = async (project: { name: string }, trx = db) => {
   return await trx.insert(Project).values({ id: crypto.randomUUID(), name: project.name }).returning()
@@ -42,8 +42,8 @@ export const createProject = async (project: { name: string }, trx = db) => {
 
 /**
  *  Creates a personal project.
- * 
- *  @param project 
+ *
+ *  @param project
  */
 export const createPersonalProject = async (project: any, trx = db) => {
   return await trx.insert(PersonalProject).values({
@@ -68,6 +68,5 @@ export const createPrivateProject = async (project: any, trx = db) => {
 }
 
 export const createTransaction = async () => {
-  return db.transaction;
+  return db.transaction
 }
-

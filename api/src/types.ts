@@ -1,4 +1,4 @@
-import { Project, PersonalProject, PrivateProject, ProjectType } from "./db/schema"
+import { Project, PersonalProject, PrivateProject, ProjectType } from './db/schema'
 
 export type Project = typeof Project.$inferSelect
 export type NewProject = typeof Project.$inferInsert
