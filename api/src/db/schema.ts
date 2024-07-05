@@ -1,17 +1,19 @@
 import { relations } from 'drizzle-orm'
 import { uniqueIndex } from 'drizzle-orm/pg-core'
+import { boolean } from 'drizzle-orm/pg-core'
 import { pgEnum } from 'drizzle-orm/pg-core'
 import { date } from 'drizzle-orm/pg-core'
 import { pgTable, uuid, varchar } from 'drizzle-orm/pg-core'
 
 /** ================================= USERS ==================================== */
-export const user = pgTable('user', {
+export const User = pgTable('user', {
   id: uuid('id').primaryKey().defaultRandom(),
   userName: varchar('user_name').notNull(),
   email: varchar('email').notNull(),
   createdAt: date('created_at').defaultNow(),
   updatedAt: date('updated_at').defaultNow(),
   password: varchar('password'),
+  admin: boolean('isAdmin').default(false),
 }, (table) => {
   return {
     nameIdx: uniqueIndex('username_idx').on(table.userName),
