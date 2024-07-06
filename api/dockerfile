@@ -1,3 +1,5 @@
+ARG DB_URL
+
 #Build stage
 FROM node:21-alpine AS build
 
@@ -9,6 +11,7 @@ RUN npm install
 
 COPY . .
 
+ARG DB_URL
 ENV DB_URL=$DB_URL
 
 RUN npm run db:generate
