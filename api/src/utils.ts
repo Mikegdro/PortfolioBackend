@@ -9,7 +9,6 @@ const isDate = (possibleDate: string): boolean => {
   return Boolean(Date.parse(possibleDate))
 }
 
-
 // Parses and validates the comment
 const parseComment = (object: any): string => {
   if (!isString(object)) {
