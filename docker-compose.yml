@@ -11,3 +11,6 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: portfolio
+
+  node:
+    build: .
