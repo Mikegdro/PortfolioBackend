@@ -1,8 +1,11 @@
 import { relations } from 'drizzle-orm'
-import { uniqueIndex, integer, numeric, boolean, pgEnum, date, pgTable, uuid, varchar } from 'drizzle-orm/pg-core'
+import { pgSchema } from 'drizzle-orm/pg-core'
+import { uniqueIndex, numeric, boolean, date, uuid, varchar } from 'drizzle-orm/pg-core'
+
+export const ApiSchema = pgSchema('api')
 
 /** ================================= USERS ==================================== */
-export const User = pgTable('user', {
+export const User = ApiSchema.table('user', {
   id: uuid('id').primaryKey().defaultRandom(),
   userName: varchar('user_name').notNull(),
   email: varchar('email').notNull(),
@@ -18,19 +21,19 @@ export const User = pgTable('user', {
 })
 
 /** ================================= PROJECTS ==================================== */
-export const ProjectType = pgEnum('project_type', ['private', 'personal'])
+export const ProjectType = ApiSchema.enum('project_type', ['private', 'personal'])
 
-export const Project = pgTable('project', {
+export const Project = ApiSchema.table('project', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('description', { length: 256 }),
   type: ProjectType('type')
 }, (table) => {
   return {
-    nameIndex: uniqueIndex('name_idx').on(table.name)
+    nameIndex: uniqueIndex('project_name_idx').on(table.name)
   }
 })
 
-export const PersonalProject = pgTable('personal_project', {
+export const PersonalProject = ApiSchema.table('personal_project', {
   id: uuid('personal_project_id').primaryKey().defaultRandom(),
   idProject: uuid('project_id').references(() => Project.id).unique(),
   title: varchar('title', { length: 256 }).notNull(),
@@ -43,7 +46,7 @@ export const PersonalProject = pgTable('personal_project', {
   }
 })
 
-export const PrivateProject = pgTable('private_project', {
+export const PrivateProject = ApiSchema.table('private_project', {
   id: uuid('private_project_id').primaryKey().defaultRandom(),
   idProject: uuid('project_id').references(() => Project.id).unique(),
   title: varchar('title', { length: 256 }).notNull(),
@@ -58,7 +61,7 @@ export const PrivateProject = pgTable('private_project', {
 
 /** ================================= Company ==================================== */
 
-export const Company = pgTable('company', {
+export const Company = ApiSchema.table('company', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name').notNull(),
   linkedin: varchar('linkedn'),
@@ -93,9 +96,9 @@ export const personalProjectsRelation = relations(PersonalProject, ({ one }) => 
 
 /** ================================= ACHIEVEMENTS ==================================== */
 
-export const Rol = pgEnum('rol', ['Frontend', 'Backend', 'Fullstack'])
+export const Rol = ApiSchema.enum('rol', ['Frontend', 'Backend', 'Fullstack'])
 
-export const Achievement = pgTable('achievement', {
+export const Achievement = ApiSchema.table('achievement', {
   id: uuid('id').primaryKey().defaultRandom(),
   projectId: uuid('id').references(() => Project.id),
   title: varchar('title').notNull(),
@@ -103,7 +106,7 @@ export const Achievement = pgTable('achievement', {
   rol: Rol('rol')
 }, (table) => {
   return {
-    titleIdx: uniqueIndex('title_index').on(table.title),
+    titleIdx: uniqueIndex('ach_title_index').on(table.title),
     rolIdx: uniqueIndex('rol_index').on(table.rol)
   }
 })
@@ -116,7 +119,7 @@ export const achievementProjectRelation = relations(Achievement, ({ one }) => ({
 
 /** ================================= EDUCATION ==================================== */
 
-export const Education = pgTable('education', {
+export const Education = ApiSchema.table('education', {
   id: uuid('id').primaryKey().defaultRandom(),
   title: varchar('title').notNull(),
   description: varchar('description'),
@@ -127,11 +130,11 @@ export const Education = pgTable('education', {
   endDate: date('end_date')
 }, (table) => {
   return {
-    titleIdx: uniqueIndex('title_index').on(table.title)
+    titleIdx: uniqueIndex('edu_title_index').on(table.title)
   }
 })
 
-export const Course = pgTable('course', {
+export const Course = ApiSchema.table('course', {
   id: uuid('id').primaryKey().defaultRandom(),
   title: varchar('title').notNull(),
   description: varchar('description'),
@@ -140,7 +143,7 @@ export const Course = pgTable('course', {
   linkedin: varchar('linkedin')
 }, (table) => {
   return {
-    titleIdx: uniqueIndex('title_index').on(table.title)
+    titleIdx: uniqueIndex('course_title_index').on(table.title)
   }
 })
 

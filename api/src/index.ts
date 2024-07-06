@@ -4,6 +4,9 @@ import projects from './routes/projects'
 
 import { corsMiddleware } from './middleware/cors'
 
+// Initalization message
+console.log("Initializing server...")
+
 // App initialization
 const app = express()
 app.use(express.json())
@@ -18,3 +21,4 @@ const port = 3000
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`)
 })
+

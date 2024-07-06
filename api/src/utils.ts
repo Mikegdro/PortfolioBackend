@@ -26,3 +26,20 @@ const parseDate = (dateFromRequest: any): string => {
 
   return dateFromRequest
 }
+
+/**
+ *  Util function to retrieve the string of an error with type-safety.
+ * 
+ *  @param err 
+ *  @returns 
+ */
+export const errorHandler = (err: any): string => {
+
+  if (typeof err === 'string') {
+    return err;
+  } else if (err instanceof Error) {
+    return err.message
+  }
+
+  return "An unknown error has ocurred."
+}

@@ -1,14 +1,28 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
-import { db, connection } from './index'
+import { connection } from './index'
+
+import { errorHandler } from '../utils'
+
+import { db } from './index'
 
 import dotenv from 'dotenv'
 
 dotenv.config()
 
-const main = async () => {
+const executeMigrations = async () => {
+
+  console.log("Executing migrations...")
+ 
   await migrate(db, { migrationsFolder: './src/db/migrations' })
+    .then(() => {
+      console.log("Migrations succesfully executed")
+    }).catch((err) => {
+      console.error(errorHandler(err))
+      process.exit(1)
+    })
 
   await connection.end()
+
 }
 
-main()
+executeMigrations()

@@ -1,5 +1,14 @@
 services:
 
+  node:
+    build: ./api
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:      
+      db:
+        condition: service_started
+
   db:
     image: postgres:latest
     restart: always
@@ -11,7 +20,3 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: portfolio
-
-  node:
-    build: ./api
-    restart: always
