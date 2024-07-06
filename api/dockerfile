@@ -9,8 +9,6 @@ RUN npm install
 
 COPY . .
 
-ARG DB_URL=$DB
-
 RUN npm run db:generate
 RUN npm run db:migrate
 
