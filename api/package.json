@@ -10,7 +10,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx ./src/db/migrate.ts",
     "lint": "ts-standard --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo no tests yet"
   },
   "keywords": [],
   "author": "",
