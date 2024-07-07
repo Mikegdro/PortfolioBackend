@@ -11,7 +11,7 @@ dotenv.config()
 
 const executeMigrations = async () => {
 
-  console.log("Executing migrations...")
+  console.log(`Executing migrations for: ${process.env.DB_URL}`)
  
   await migrate(db, { migrationsFolder: './src/db/migrations' })
     .then(() => {
