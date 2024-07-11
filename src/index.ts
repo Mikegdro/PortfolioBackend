@@ -3,9 +3,13 @@ import express from 'express'
 import projects from './routes/projects'
 
 import { corsMiddleware } from './middleware/cors'
+import { executeMigrations } from './db/migrate'
 
 // Initalization message
 console.log("Initializing server...")
+
+// Migrations
+executeMigrations()
 
 // App initialization
 const app = express()

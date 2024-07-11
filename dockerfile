@@ -14,9 +14,6 @@ COPY . .
 ARG DB_URL
 ENV DB_URL=$DB_URL
 
-RUN npm run db:generate
-RUN npm run db:migrate
-
 RUN npm run build
 
 #Production stage
@@ -29,5 +26,6 @@ COPY package*.json .
 RUN npm ci --only=production
 
 COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/src/db ./src/db/migrations
 
 CMD ["node", "dist/index.js"]

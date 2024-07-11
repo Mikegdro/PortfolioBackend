@@ -13,22 +13,3 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: portfolio
-    networks:
-      - backend
-
-  node:
-    build: 
-      context: .
-      args:
-        - DB_URL=${DB_URL}
-    restart: always
-    ports:
-      - "3000:3000"
-    depends_on:      
-      - db
-    networks:
-      - backend
-    
-
-networks:
-  backend:

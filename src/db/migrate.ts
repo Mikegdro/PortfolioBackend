@@ -9,7 +9,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const executeMigrations = async () => {
+export const executeMigrations = async () => {
 
   console.log(`Executing migrations for: ${process.env.DB_URL}`)
  
@@ -25,4 +25,4 @@ const executeMigrations = async () => {
 
 }
 
-executeMigrations()
+// executeMigrations()
