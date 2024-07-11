@@ -73,27 +73,6 @@ export const Company = ApiSchema.table('company', {
   }
 })
 
-/** ================================= Project & Company Relations ==================================== */
-
-export const projectsRelations = relations(Project, ({ many, one }) => ({
-  PersonalProject: one(PersonalProject),
-  PrivateProject: one(PrivateProject),
-  Achievement: many(Achievement)
-}))
-
-export const companyRelations = relations(Company, ({ many }) => ({
-  PrivateProject: many(PrivateProject)
-}))
-
-export const privateProjectsRelation = relations(PrivateProject, ({ one }) => ({
-  Project: one(Project, { fields: [PrivateProject.idProject], references: [Project.id] }),
-  Company: one(Company, { fields: [PrivateProject.companyId], references: [Company.id] })
-}))
-
-export const personalProjectsRelation = relations(PersonalProject, ({ one }) => ({
-  Project: one(Project, { fields: [PersonalProject.idProject], references: [Project.id] })
-}))
-
 /** ================================= ACHIEVEMENTS ==================================== */
 
 export const Rol = ApiSchema.enum('rol', ['Frontend', 'Backend', 'Fullstack'])
@@ -110,12 +89,6 @@ export const Achievement = ApiSchema.table('achievement', {
     rolIdx: uniqueIndex('rol_index').on(table.rol)
   }
 })
-
-/** ================================= Project & Achievement Relation ==================================== */
-
-export const achievementProjectRelation = relations(Achievement, ({ one }) => ({
-  Project: one(Project)
-}))
 
 /** ================================= EDUCATION ==================================== */
 
@@ -151,3 +124,29 @@ export const Course = ApiSchema.table('course', {
 
 /** ================================= PROJECTS ==================================== */
 /** ================================= PROJECTS ==================================== */
+
+
+/** ================================= Relations ==================================== */
+
+export const projectsRelations = relations(Project, ({ many, one }) => ({
+  PersonalProject: one(PersonalProject),
+  PrivateProject: one(PrivateProject),
+  Achievement: many(Achievement)
+}))
+
+export const companyRelations = relations(Company, ({ many }) => ({
+  PrivateProject: many(PrivateProject)
+}))
+
+export const privateProjectsRelation = relations(PrivateProject, ({ one }) => ({
+  Project: one(Project, { fields: [PrivateProject.idProject], references: [Project.id] }),
+  Company: one(Company, { fields: [PrivateProject.companyId], references: [Company.id] })
+}))
+
+export const personalProjectsRelation = relations(PersonalProject, ({ one }) => ({
+  Project: one(Project, { fields: [PersonalProject.idProject], references: [Project.id] })
+}))
+
+export const achievementProjectRelation = relations(Achievement, ({ one }) => ({
+  Project: one(Project, { fields: [Achievement.projectId], references: [Project.id] })
+}))

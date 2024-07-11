@@ -18,10 +18,9 @@ export const executeMigrations = async () => {
       console.log("Migrations succesfully executed")
     }).catch((err) => {
       console.error(errorHandler(err))
+      connection.end()
       process.exit(1)
     })
-
-  await connection.end()
 
 }
 
