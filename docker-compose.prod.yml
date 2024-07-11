@@ -10,3 +10,5 @@ services:
     restart: always
     environment:
       DB_URL: ${DB}
+    ports:
+      - "3000:3000"
