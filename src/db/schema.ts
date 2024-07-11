@@ -1,6 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { pgSchema } from 'drizzle-orm/pg-core'
-import { uniqueIndex, numeric, boolean, date, uuid, varchar } from 'drizzle-orm/pg-core'
+import { pgSchema, uniqueIndex, numeric, boolean, date, uuid, varchar } from 'drizzle-orm/pg-core'
 
 export const ApiSchema = pgSchema('api')
 
@@ -124,7 +123,6 @@ export const Course = ApiSchema.table('course', {
 
 /** ================================= PROJECTS ==================================== */
 /** ================================= PROJECTS ==================================== */
-
 
 /** ================================= Relations ==================================== */
 

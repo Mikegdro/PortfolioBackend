@@ -52,9 +52,10 @@ export const getProjectById = async (req: Request, res: Response) => {
  *  @param res
  */
 export const createProjectWithChildren = async (req: Request, res: Response) => {
+
   // Try-catch for Error processing
   try {
-
+    res.status(202).send("Project created successfully")
   } catch (err) {
     handleError(res, err)
   }
