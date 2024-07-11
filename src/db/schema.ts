@@ -100,7 +100,7 @@ export const Rol = ApiSchema.enum('rol', ['Frontend', 'Backend', 'Fullstack'])
 
 export const Achievement = ApiSchema.table('achievement', {
   id: uuid('id').primaryKey().defaultRandom(),
-  projectId: uuid('id').references(() => Project.id),
+  projectId: uuid('project_id').references(() => Project.id),
   title: varchar('title').notNull(),
   description: varchar('description'),
   rol: Rol('rol')
