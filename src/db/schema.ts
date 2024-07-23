@@ -72,7 +72,7 @@ export const Company = ApiSchema.table('company', {
   }
 })
 
-/** ================================= ACHIEVEMENTS ==================================== */
+/** ================================= Achievements ==================================== */
 
 export const Rol = ApiSchema.enum('rol', ['Frontend', 'Backend', 'Fullstack'])
 
@@ -89,7 +89,7 @@ export const Achievement = ApiSchema.table('achievement', {
   }
 })
 
-/** ================================= EDUCATION ==================================== */
+/** ================================= Education ==================================== */
 
 export const Education = ApiSchema.table('education', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -106,6 +106,8 @@ export const Education = ApiSchema.table('education', {
   }
 })
 
+/** ================================= Courses ==================================== */
+
 export const Course = ApiSchema.table('course', {
   id: uuid('id').primaryKey().defaultRandom(),
   title: varchar('title').notNull(),
@@ -119,10 +121,23 @@ export const Course = ApiSchema.table('course', {
   }
 })
 
-/** ================================= TECNOLOGIES ==================================== */
+/** ================================= Tecnologies ==================================== */
 
-/** ================================= PROJECTS ==================================== */
-/** ================================= PROJECTS ==================================== */
+export const Tecnology = ApiSchema.table('tecnology', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: varchar('name').notNull(),
+  description: varchar('description'),
+  site: varchar('site'),
+  twitter: varchar('twitter'),
+  logo: varchar('logo')
+}, (table) => {
+  return {
+    nameIdx: uniqueIndex('tecnology_name_idx').on(table.name)
+  }
+})
+
+/** ================================= Experience ==================================== */
+
 
 /** ================================= Relations ==================================== */
 
