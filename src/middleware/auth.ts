@@ -1,12 +1,11 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express'
 
 export const AuthMiddleware = (request: Request, response: Response, next: NextFunction) => {
-
   // Retrieve the token
-  let token = request.headers.authorization
+  const token = request.headers.authorization
 
   // Send the token to the GoAuth service to check it
-  let auth = false;
+  let auth = false
 
   if (!token) {
     auth = false
@@ -14,7 +13,7 @@ export const AuthMiddleware = (request: Request, response: Response, next: NextF
 
   // Check the response from the service
   if (!auth) {
-    response.status(401).send("The token is invalid.")
+    response.status(401).send('The token is invalid.')
   }
 
   next()

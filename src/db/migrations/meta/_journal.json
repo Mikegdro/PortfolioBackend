@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1720436205573,
-      "tag": "0000_curved_firedrake",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1720694870311,
-      "tag": "0001_unknown_liz_osborn",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1721732857815,
-      "tag": "0002_organic_carlie_cooper",
+      "when": 1721814505079,
+      "tag": "0000_lethal_rhodey",
       "breakpoints": true
     }
   ]

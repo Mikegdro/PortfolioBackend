@@ -1,5 +1,5 @@
 {
-  "id": "83d7a8f0-745d-4a32-8a15-c93a9dfca011",
+  "id": "393c63b0-938e-434d-92ec-dc4dd1089394",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,6 +10,13 @@
       "columns": {
         "id": {
           "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "project_id": {
+          "name": "project_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
@@ -67,18 +74,18 @@
         }
       },
       "foreignKeys": {
-        "achievement_id_project_id_fk": {
-          "name": "achievement_id_project_id_fk",
+        "achievement_project_id_project_id_fk": {
+          "name": "achievement_project_id_project_id_fk",
           "tableFrom": "achievement",
           "tableTo": "project",
           "schemaTo": "api",
           "columnsFrom": [
-            "id"
+            "project_id"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -280,6 +287,69 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "api.experience": {
+      "name": "experience",
+      "schema": "api",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "role": {
+          "name": "role",
+          "type": "role",
+          "typeSchema": "api",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "company_id": {
+          "name": "company_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "start_date": {
+          "name": "start_date",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "end_date": {
+          "name": "end_date",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "experience_company_id_company_id_fk": {
+          "name": "experience_company_id_company_id_fk",
+          "tableFrom": "experience",
+          "tableTo": "company",
+          "schemaTo": "api",
+          "columnsFrom": [
+            "company_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "api.personal_project": {
       "name": "personal_project",
       "schema": "api",
@@ -351,20 +421,12 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "personal_project_project_id_unique": {
-          "name": "personal_project_project_id_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "project_id"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "api.private_project": {
       "name": "private_project",
@@ -391,6 +453,12 @@
         },
         "company_id": {
           "name": "company_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "experience_id": {
+          "name": "experience_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
@@ -437,7 +505,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "private_project_company_id_company_id_fk": {
@@ -451,20 +519,26 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "private_project_experience_id_experience_id_fk": {
+          "name": "private_project_experience_id_experience_id_fk",
+          "tableFrom": "private_project",
+          "tableTo": "experience",
+          "schemaTo": "api",
+          "columnsFrom": [
+            "experience_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "private_project_project_id_unique": {
-          "name": "private_project_project_id_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "project_id"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "api.project": {
       "name": "project",
@@ -477,8 +551,8 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "description": {
-          "name": "description",
+        "name": {
+          "name": "name",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
@@ -496,7 +570,77 @@
           "name": "project_name_idx",
           "columns": [
             {
-              "expression": "description",
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "api.tecnology": {
+      "name": "tecnology",
+      "schema": "api",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tech_type": {
+          "name": "tech_type",
+          "type": "tech_type",
+          "typeSchema": "api",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "site": {
+          "name": "site",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "twitter": {
+          "name": "twitter",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "logo": {
+          "name": "logo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "tecnology_name_idx": {
+          "name": "tecnology_name_idx",
+          "columns": [
+            {
+              "expression": "name",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -598,6 +742,65 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
+    },
+    "api.tecnology_to_project": {
+      "name": "tecnology_to_project",
+      "schema": "api",
+      "columns": {
+        "project_id": {
+          "name": "project_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tecnology_id": {
+          "name": "tecnology_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "tecnology_to_project_project_id_project_id_fk": {
+          "name": "tecnology_to_project_project_id_project_id_fk",
+          "tableFrom": "tecnology_to_project",
+          "tableTo": "project",
+          "schemaTo": "api",
+          "columnsFrom": [
+            "project_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "tecnology_to_project_tecnology_id_tecnology_id_fk": {
+          "name": "tecnology_to_project_tecnology_id_tecnology_id_fk",
+          "tableFrom": "tecnology_to_project",
+          "tableTo": "tecnology",
+          "schemaTo": "api",
+          "columnsFrom": [
+            "tecnology_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "tecnology_to_project_project_id_tecnology_id_pk": {
+          "name": "tecnology_to_project_project_id_tecnology_id_pk",
+          "columns": [
+            "project_id",
+            "tecnology_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
     }
   },
   "enums": {
@@ -616,6 +819,25 @@
         "Frontend",
         "Backend",
         "Fullstack"
+      ]
+    },
+    "api.role": {
+      "name": "role",
+      "schema": "api",
+      "values": [
+        "frontend",
+        "backend",
+        "devops",
+        "fullstack"
+      ]
+    },
+    "api.tech_type": {
+      "name": "tech_type",
+      "schema": "api",
+      "values": [
+        "frontend",
+        "backend",
+        "devops"
       ]
     }
   },

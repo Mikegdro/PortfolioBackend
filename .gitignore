@@ -38,9 +38,13 @@ Thumbs.db
 dist
 dist/**/*
 
-# Ignore al DB data
+# Ignore all DB data
 postgres
 postgres/**/*
+
+# Ignore all PgAdmin data
+pgAdmin
+pgAdmin/**/*
 
 # ignore yarn.lock
 yarn.lock

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import * as ProjectModel from '../models/projects'
+import * as ProjectModel from '../models/ProjectModel'
 
 import { createTransaction } from '../db'
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js'
@@ -52,10 +52,9 @@ export const getProjectById = async (req: Request, res: Response) => {
  *  @param res
  */
 export const createProjectWithChildren = async (req: Request, res: Response) => {
-
   // Try-catch for Error processing
   try {
-    res.status(202).send("Project created successfully")
+    res.status(202).send('Project created successfully')
   } catch (err) {
     handleError(res, err)
   }
@@ -130,6 +129,13 @@ const createPersonalProject = async (req: Request, res: Response) => {
   res.status(201).json(result)
 }
 
+/**
+ *  This function manages the creation of a private project, using the transaction object provided by drizzle,
+ *  and passing it to the through params to ensure the correct creation of both tables.
+ *
+ *  @param req HTTP request through Express
+ *  @param res HTTP response
+ */
 const createPrivateProject = async (req: Request, res: Response) => {
   const project = req.body
 
