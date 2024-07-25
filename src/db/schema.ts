@@ -46,7 +46,7 @@ export const Tecnology = ApiSchema.table('tecnology', {
   logo: varchar('logo')
 }, (table) => {
   return {
-    nameIdx: uniqueIndex('tecnology_name_idx').on(table.name),
+    nameIdx: uniqueIndex('tecnology_name_idx').on(table.name)
   }
 })
 
@@ -59,7 +59,7 @@ export const tecnologyToProject = ApiSchema.table('tecnology_to_project', {
 
 export const PersonalProject = ApiSchema.table('personal_project', {
   id: uuid('personal_project_id').primaryKey().defaultRandom(),
-  idProject: uuid('project_id').references(() => Project.id, { onDelete: 'cascade'}),
+  idProject: uuid('project_id').references(() => Project.id, { onDelete: 'cascade' }),
   title: varchar('title', { length: 256 }).notNull(),
   repository: varchar('repository'),
   image: varchar('image'),
@@ -74,8 +74,8 @@ export const PrivateProject = ApiSchema.table('private_project', {
   id: uuid('private_project_id').primaryKey().defaultRandom(),
   idProject: uuid('project_id').references(() => Project.id, { onDelete: 'cascade' }),
   title: varchar('title', { length: 256 }).notNull(),
-  companyId: uuid('company_id').references(() => Company.id, { onDelete: 'set null'}),
-  experienceId: uuid('experience_id').references(() => Experience.id, { onDelete: 'set null'}),
+  companyId: uuid('company_id').references(() => Company.id, { onDelete: 'set null' }),
+  experienceId: uuid('experience_id').references(() => Experience.id, { onDelete: 'set null' }),
   startDate: date('start_date'),
   endDate: date('end_date')
 }, (table) => {
@@ -104,7 +104,7 @@ export const Rol = ApiSchema.enum('rol', ['Frontend', 'Backend', 'Fullstack'])
 
 export const Achievement = ApiSchema.table('achievement', {
   id: uuid('id').primaryKey().defaultRandom(),
-  projectId: uuid('project_id').references(() => Project.id, { onDelete: 'cascade'} ),
+  projectId: uuid('project_id').references(() => Project.id, { onDelete: 'cascade' }),
   title: varchar('title').notNull(),
   description: varchar('description'),
   rol: Rol('rol')

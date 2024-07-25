@@ -21,10 +21,10 @@ export const retrieveAllExperiences = async () => {
 
 /**
  *  Retrieves a single experience.
- * 
- *  @param id 
- *  @returns 
+ *
+ *  @param id
+ *  @returns
  */
 export const retrieveExperience = async (id: any) => {
-  return await db.query.Experience.findFirst({where: eq(Experience.id, id)})
+  return await db.query.Experience.findFirst({ where: eq(Experience.id, id) })
 }

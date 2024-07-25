@@ -3,7 +3,6 @@ import { Request, Response } from 'express'
 import * as ProjectModel from '../models/ProjectModel'
 
 import { createTransaction } from '../db'
-import { PostgresJsDatabase } from 'drizzle-orm/postgres-js'
 
 /**
  *  Retrieves the entire length of projects with its children.

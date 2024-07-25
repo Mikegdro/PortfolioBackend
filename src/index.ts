@@ -4,8 +4,6 @@ import express from 'express'
 // dotenv
 import dotenv from 'dotenv'
 
-dotenv.config()
-
 // Routes
 import projects from './routes/ProjectRouter'
 import experiences from './routes/ExperienceRouter'
@@ -14,6 +12,8 @@ import tecnologies from './routes/TecnologyRouter'
 import { corsMiddleware } from './middleware/cors'
 import { executeMigrations } from './db/migrate'
 import seedDB from './db/seed'
+
+dotenv.config()
 
 // Initalization message
 console.log('Initializing server...')
@@ -26,8 +26,6 @@ executeMigrations().then(() => {
     seedDB()
   }
 })
-
-
 
 // App initialization
 const app = express()

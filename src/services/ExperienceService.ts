@@ -24,13 +24,12 @@ export const getExperiences = async (req: Request, res: Response) => {
 
 /**
  *  Retrieves a single experience.
- * 
- *  @param req 
- *  @param res 
+ *
+ *  @param req
+ *  @param res
  */
 export const getExperience = async (req: Request, res: Response) => {
   try {
-
     if (!req.params.id) {
       throw new Error('No se ha proporcionado un id')
     }
@@ -38,10 +37,10 @@ export const getExperience = async (req: Request, res: Response) => {
     if (!validateUUID(req.params.id)) {
       throw new Error('No se ha proporcionado un UUID válido')
     }
-    
+
     const data = await ExperienceModel.retrieveExperience(req.params.id)
     res.status(200).send(data)
-  } catch (err){
+  } catch (err) {
     console.log(err)
     res.status(500).send('Algo ha ocurrido mal, inténtelo de nuevo más tarde')
   }
@@ -49,14 +48,14 @@ export const getExperience = async (req: Request, res: Response) => {
 
 /**
  *  Creates an experience.
- * 
- *  @param req 
- *  @param res 
+ *
+ *  @param req
+ *  @param res
  */
 export const createExperience = async (req: Request, res: Response) => {
   try {
 
-  } catch (err){
+  } catch (err) {
     console.log(err)
     res.status(500).send('Algo ha ocurrido mal, inténtelo de nuevo más tarde')
   }

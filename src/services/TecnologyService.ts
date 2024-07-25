@@ -24,13 +24,12 @@ export const getTecnologies = async (req: Request, res: Response) => {
 
 /**
  *  Retrieves a single tecnology.
- * 
- *  @param req 
- *  @param res 
+ *
+ *  @param req
+ *  @param res
  */
 export const getTecnology = async (req: Request, res: Response) => {
   try {
-
     if (!req.params.id) {
       res.status(400).send('No se ha invado ningún id')
     }
@@ -45,4 +44,8 @@ export const getTecnology = async (req: Request, res: Response) => {
     console.log(err)
     res.status(500).send('Algo ha ocurrido mal, inténtelo de nuevo más tarde')
   }
+}
+
+export const createTecnology = async (req: Request, res: Response) => {
+  
 }

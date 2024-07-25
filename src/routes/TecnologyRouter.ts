@@ -1,5 +1,5 @@
 import express from 'express'
-import * as projectService from '../services/ProjectService'
+
 import * as tecnologyService from '../services/TecnologyService'
 
 import { AuthMiddleware } from '../middleware/auth'
@@ -13,6 +13,6 @@ router.get('/', tecnologyService.getTecnologies)
 router.get('/:id', tecnologyService.getTecnology)
 
 // Adds a tecnology
-router.post('/', AuthMiddleware, projectService.createProjectWithChildren)
+router.post('/', AuthMiddleware, tecnologyService.createTecnology)
 
 export default router

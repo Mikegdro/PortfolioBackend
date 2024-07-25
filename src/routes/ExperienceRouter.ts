@@ -9,9 +9,9 @@ const router = express.Router()
 router.get('/', experienceService.getExperiences)
 
 // Retrieves one experience
-router.get("/:id", experienceService.getExperience);
+router.get('/:id', experienceService.getExperience)
 
 // Adds an exprience
-router.post("/", AuthMiddleware, experienceService.createExperience);
+router.post('/', AuthMiddleware, experienceService.createExperience)
 
 export default router

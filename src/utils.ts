@@ -45,8 +45,8 @@ export const errorHandler = (err: any): string => {
 
 /**
  *  This functions recieves an uuid and validates it according to RFC 4122.
- * 
- *  @param uuid 
+ *
+ *  @param uuid
  */
 export const validateUUID = (uuid: string): boolean => {
   return /^[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$/.test(uuid)
