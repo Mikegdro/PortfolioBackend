@@ -1,18 +1,18 @@
 import express from 'express'
 
-import * as tecnologyService from '../services/TecnologyService'
+import { getTecnologies, getTecnology, createTecnology } from '../services/TecnologyService'
 
 import { AuthMiddleware } from '../middleware/auth'
 
 const router = express.Router()
 
 // Retrieves ALL tecnologies
-router.get('/', tecnologyService.getTecnologies)
+router.get('/', getTecnologies)
 
 // Retrieves one tecnology
-router.get('/:id', tecnologyService.getTecnology)
+router.get('/:id', getTecnology)
 
 // Adds a tecnology
-router.post('/', AuthMiddleware, tecnologyService.createTecnology)
+router.post('/', AuthMiddleware, createTecnology)
 
 export default router

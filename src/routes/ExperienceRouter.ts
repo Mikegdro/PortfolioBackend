@@ -1,17 +1,18 @@
 import express from 'express'
-import * as experienceService from '../services/ExperienceService'
+
+import { getExperiences, getExperience, createExperience } from '../services/ExperienceService'
 
 import { AuthMiddleware } from '../middleware/auth'
 
 const router = express.Router()
 
 // Retrieves ALL projects
-router.get('/', experienceService.getExperiences)
+router.get('/', getExperiences)
 
 // Retrieves one experience
-router.get('/:id', experienceService.getExperience)
+router.get('/:id', getExperience)
 
 // Adds an exprience
-router.post('/', AuthMiddleware, experienceService.createExperience)
+router.post('/', AuthMiddleware, createExperience)
 
 export default router

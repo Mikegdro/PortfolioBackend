@@ -1,17 +1,18 @@
 import express from 'express'
-import * as projectService from '../services/ProjectService'
+
+import { getProjects, getProjectById, createProjectWithChildren } from '../services/ProjectService'
 
 import { AuthMiddleware } from '../middleware/auth'
 
 const router = express.Router()
 
 // Retrieves ALL projects
-router.get('/', projectService.getProjects)
+router.get('/', getProjects)
 
 // Retrieves one project
-router.get('/:id', projectService.getProjectById)
+router.get('/:id', getProjectById)
 
 // Adds a project
-router.post('/', AuthMiddleware, projectService.createProjectWithChildren)
+router.post('/', AuthMiddleware, createProjectWithChildren)
 
 export default router
