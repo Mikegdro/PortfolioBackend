@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { getExperiences, getExperience, createExperience } from '../services/ExperienceService'
+import { getExperiences, getExperience, createExperience } from '../services/experienceService'
 
 import { AuthMiddleware } from '../middleware/auth'
 

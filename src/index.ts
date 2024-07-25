@@ -5,9 +5,9 @@ import express from 'express'
 import dotenv from 'dotenv'
 
 // Routes
-import projects from './routes/ProjectRouter'
-import experiences from './routes/ExperienceRouter'
-import tecnologies from './routes/TecnologyRouter'
+import projects from './routes/projectRouter'
+import experiences from './routes/experienceRouter'
+import tecnologies from './routes/tecnologyRouter'
 
 import { corsMiddleware } from './middleware/cors'
 import { executeMigrations } from './db/migrate'

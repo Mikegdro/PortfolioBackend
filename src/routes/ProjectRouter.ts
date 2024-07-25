@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { getProjects, getProjectById, createProjectWithChildren } from '../services/ProjectService'
+import { getProjects, createProjectWithChildren, getProjectById } from '../services/projectService'
 
 import { AuthMiddleware } from '../middleware/auth'
 

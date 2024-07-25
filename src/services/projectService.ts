@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import * as ProjectModel from '../models/ProjectModel'
+import * as ProjectModel from '../models/projectModel'
 
 import { createTransaction } from '../db'
 

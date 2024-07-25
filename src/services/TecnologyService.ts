@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import * as TecnologyModel from '../models/TecnologyModel'
+import * as TecnologyModel from '../models/tecnologyModel'
 
 import { createTransaction } from '../db'
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js'

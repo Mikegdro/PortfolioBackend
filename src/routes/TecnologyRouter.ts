@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { getTecnologies, getTecnology, createTecnology } from '../services/TecnologyService'
+import { getTecnologies, getTecnology, createTecnology } from '../services/tecnologyService'
 
 import { AuthMiddleware } from '../middleware/auth'
 

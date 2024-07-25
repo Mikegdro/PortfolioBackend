@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import * as ExperienceModel from '../models/ExperienceModel'
+import * as ExperienceModel from '../models/experienceModel'
 
 import { createTransaction } from '../db'
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js'
