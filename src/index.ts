@@ -21,7 +21,9 @@ console.log('Initializing server...')
 // Migrations
 executeMigrations().then(() => {
   // Seeding the DB
-  seedDB()
+  if (process.env.NODE_ENV === 'development') {
+    seedDB()
+  }
 })
 
 // App initialization
