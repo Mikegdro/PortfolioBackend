@@ -285,9 +285,9 @@ const SeedCivicaData = async () => {
   const angular: types.NewTecnology = {
     name: 'Angular',
     description: 'Angular is a web framework that empowers developers to build fast, reliable applications.',
-    logo: 'https://logosandtypes.com/wp-content/uploads/2024/01/angular.svg',
+    logo: '/angular.png',
     twitter: 'https://x.com/angular',
-    site: '/angular.png',
+    site: 'https://angular.dev/',
     type: 'frontend'
   }
 
