@@ -86,7 +86,7 @@ const seedPortfolioFront = async () => {
     site: 'https://tailwindcss.com/',
     twitter: 'https://twitter.com/tailwindcss',
     type: 'frontend',
-    logo: 'https://tailwindcss.com/brand/tailwindcss-logotype.zip'
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Tailwind_CSS_logo.svg/1920px-Tailwind_CSS_logo.svg.png'
   }, {
     name: 'DaisyUI',
     description: 'The most popular component library for Tailwind CSS',
@@ -276,7 +276,7 @@ const SeedCivicaData = async () => {
   const java: types.NewTecnology = {
     name: 'Java',
     description: 'Java es el término general utilizado para designar el software y sus componentes: Java Runtime Environment (JRE), Java Virtual Machine (JVM) y plugin. Cuando los mensajes de error contienen términos como JRE, JVM o plugin, los mantenemos.',
-    logo: 'https://worldvectorlogo.com/es/download/java.svg',
+    logo: '/java.svg',
     twitter: 'https://x.com/java',
     site: 'https://www.java.com/es/',
     type: 'backend'
@@ -287,7 +287,7 @@ const SeedCivicaData = async () => {
     description: 'Angular is a web framework that empowers developers to build fast, reliable applications.',
     logo: 'https://logosandtypes.com/wp-content/uploads/2024/01/angular.svg',
     twitter: 'https://x.com/angular',
-    site: 'https://angular.dev/',
+    site: '/angular.png',
     type: 'frontend'
   }
 
