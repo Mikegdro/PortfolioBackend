@@ -1,8 +1,8 @@
 import cors from 'cors'
 
 const ACCEPTED_ORIGINS = [
-  'http://localhost:8080',
-  'http://localhost:4000'
+  'http://localhost:4321',
+  'https://miguelgdro.com'
 ]
 
 const corsOptions: cors.CorsOptions = {
