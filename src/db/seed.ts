@@ -276,7 +276,7 @@ const SeedCivicaData = async () => {
   const java: types.NewTecnology = {
     name: 'Java',
     description: 'Java es el término general utilizado para designar el software y sus componentes: Java Runtime Environment (JRE), Java Virtual Machine (JVM) y plugin. Cuando los mensajes de error contienen términos como JRE, JVM o plugin, los mantenemos.',
-    logo: '/java.svg',
+    logo: '/assets/java.svg',
     twitter: 'https://x.com/java',
     site: 'https://www.java.com/es/',
     type: 'backend'
@@ -285,7 +285,7 @@ const SeedCivicaData = async () => {
   const angular: types.NewTecnology = {
     name: 'Angular',
     description: 'Angular is a web framework that empowers developers to build fast, reliable applications.',
-    logo: '/angular.png',
+    logo: '/assets/angular.png',
     twitter: 'https://x.com/angular',
     site: 'https://angular.dev/',
     type: 'frontend'
