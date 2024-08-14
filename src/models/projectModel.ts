@@ -15,7 +15,11 @@ import crypto from 'crypto'
 export const retrieveAllProjects = async () => {
   return await db.query.Project.findMany({
     with: {
-      PrivateProject: true,
+      PrivateProject: {
+        with: {
+          Company: true,
+        }
+      },
       PersonalProject: true,
       Achievement: true
     }
